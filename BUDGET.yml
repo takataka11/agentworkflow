@@ -1,0 +1,29 @@
+# Economic Governance Protocol - Budget Configuration
+# AGENTS.md v5.0準拠
+
+# 月次予算（USD）
+monthly_budget_usd: 100
+
+# しきい値設定
+thresholds:
+  warning: 0.8        # 警告レベル: 80%消費で通知
+  emergency: 1.0      # 緊急レベル: 100%消費でサーキットブレーカー発動
+
+# 緊急時の自動アクション
+emergency_actions:
+  disable_workflows:
+    # 予算超過時に自動停止するワークフロー
+    - agent-runner.yml
+    - continuous-improvement.yml
+    - agent-onboarding.yml
+
+# コスト内訳（参考値）
+cost_allocation:
+  anthropic_api: 80    # Anthropic API予算: $80/月
+  firebase: 20         # Firebase予算: $20/月
+
+# 備考
+# - 予算は月初にリセットされます
+# - warning (80%)到達時に警告Issueが作成されます
+# - emergency (100%)到達時に指定ワークフローが自動停止します
+# - GitHub Actionsは無料枠（月3000分）内で運用を想定
